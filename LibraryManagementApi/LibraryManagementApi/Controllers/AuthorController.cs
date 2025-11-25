@@ -27,6 +27,13 @@ namespace LibraryManagementApi.Controllers
             var author = await _repository.GetById(Id);
             return Ok(author);
         }
+        [HttpPost]
+        public async Task<ActionResult<AuthorReadDto>> CreateAuthor(AuthorCreateDto authorCreate)
+        {
+            if (authorCreate == null)
+                return BadRequest();
+           return Ok(await _repository.CreateAsync(authorCreate));
+        }
         [HttpPut("Id")]
         public async Task<ActionResult<AuthorReadDto>> Update(int Id, AuthorUpdateDto authorUpdate)
         {
